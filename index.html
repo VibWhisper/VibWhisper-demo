@@ -178,18 +178,43 @@
     }
 
     /* 总体表现网格 */
+/* 总体表现网格布局修改 */
     .other-images-grid {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 默认分为两列 */
       gap: 25px;
     }
+
+    /* 让第3个和第4个图片块（Fig 3 & Fig 4）跨越两列，占满整行 */
+    .other-images-grid .other-img-block:nth-child(3),
+    .other-images-grid .other-img-block:nth-child(4) {
+      grid-column: span 2;
+    }
+
     .other-img-block {
       background: #fff;
       padding: 15px;
       border: 1px solid #eee;
       border-radius: 8px;
     }
-    .other-img-block img { width: 100%; border-radius: 6px; }
+
+    .other-img-block img { 
+      width: 100%; 
+      display: block; 
+      border-radius: 6px; 
+    }
+
+    /* 移动端适配：在窄屏上全部恢复为单行堆叠 */
+    @media (max-width: 768px) {
+      .other-images-grid {
+        grid-template-columns: 1fr;
+      }
+      .other-images-grid .other-img-block:nth-child(3),
+      .other-images-grid .other-img-block:nth-child(4) {
+        grid-column: span 1;
+      }
+    }
+    
     .other-caption {
       text-align: center;
       font-size: 0.9rem;
@@ -433,6 +458,7 @@
   </footer>
 </body>
 </html>
+
 
 
 
